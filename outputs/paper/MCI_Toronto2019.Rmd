@@ -8,9 +8,10 @@ Contact: oliveira.celior@gmail.com
 Date: r format(Sys.time(), '%d %B %Y')
 Pre-requisites: None
 Output:bookdown::pdf_document2:toc: yes
-thanks: 'Code and data are available at: https://github.com/CROliveira/INF2178_AssignmentOne'
+thanks: 'Code and data are available at: https://github.com/CROliveira/MCI_Toronto2019'
 bibliography: references.bib
 output:
+  word_document: default
   pdf_document: default
   html_document:
     df_print: paged
@@ -70,17 +71,17 @@ Data analysis steps were performed to find the best temporal and spatial represe
 
 
 ```{r Fetching Data Description, include = FALSE, echo = FALSE}
-library(opendatatoronto)
-
-MciDataDescription <-
-  opendatatoronto::search_packages("Major Crime Indicators") %>%
-  opendatatoronto::list_package_resources() %>%
-  filter(name == "data_dictionary.csv") %>%
-  select(id) %>%
-  opendatatoronto::get_resource()
+# library(opendatatoronto)
+# 
+# MciDataDescription <-
+#   opendatatoronto::search_packages("Major Crime Indicators") %>%
+#   opendatatoronto::list_package_resources() %>%
+#   filter(name == "data_dictionary.csv") %>%
+#   select(id) %>%
+#   opendatatoronto::get_resource()
 
 # package <- show_package("247788f6-ca20-42e8-b00f-894ac43053e5")
-write.csv(here::here("inputs/data/MciDataDescription.csv"))
+# write.csv(here::here("inputs/data/MciDataDescription.csv"))
 # View(MciDataDescription)
 ```
 
@@ -145,7 +146,7 @@ This study does not rely on the analysis of any specific time frame and to speed
 
 
 ```{r Reading filtered data (2019), echo = FALSE, message = FALSE}
-mci <- read_csv(here("fileteredMCI.csv"))
+mci <- read_csv(here("inputs/data/fileteredMCI.csv"))
 # head(mci) # display first six rows
 # names(mci) # column names
 

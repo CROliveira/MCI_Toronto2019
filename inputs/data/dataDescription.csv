@@ -1,0 +1,28 @@
+Field,Description
+Index_,Record Unique Identifier
+event_unique_id,Event Unique Identifier
+occurrencedate,Date of occurrence
+reporteddate,Date occurrence was reported
+premisetype,Premise where occurrence took place
+ucr_code,URC Code
+ucr_ext,URC Code Extension
+offence,Offence related to the occurrence
+reportedyear,Year occurrence was reported
+reportedmonth,Month occurrence was reported
+reportedday,Day occurrence was reported
+reporteddayofyear,Day of year Occurrence was reported. 
+reporteddayofweek,Day of week occurrence was reported
+reportedhour,Hour occurrence was reported
+occurrenceyear,Occurrence year
+occurrencemonth,Occurrence month
+occurrenceday,Occurrence day
+occurrencedayofyear,Occurrence day of year
+occurrencedayofweek,Occurrence day of week
+occurrencehour,Occurrence hour
+MCI,Major Crime Indicator related to the offence
+Division,Division where event occurred
+Hood_ID,Neighbourhood Name
+Neighbourhood,Neighbourhood Identificator
+Long,Longitude of point extracted after offsetting X and & Coordinates to nearest intersection node
+Lat,Latitude of point extracted after offsetting X and & Coordinates to nearest intersection node
+ObjectId,
