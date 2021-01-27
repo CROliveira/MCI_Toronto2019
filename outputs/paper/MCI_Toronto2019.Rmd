@@ -11,8 +11,8 @@ Output:bookdown::pdf_document2:toc: yes
 thanks: "Code and data are available at: https://github.com/CROliveira/MCI_Toronto2019"
 bibliography: references.bib
 output:
-  word_document: default
   pdf_document: default
+  word_document: default
   html_document:
     df_print: paged
 ---
@@ -44,7 +44,7 @@ check_for_packages <- function( pkg){
 }
 
 # Passing the libraries call to the check.packages function
-packages<-c( "tidyverse", "here", "dplyr", "ggplot2",  "ggmap")
+packages<-c( "tidyverse", "here", "dplyr", "ggplot2",  "ggmap", "kableExtra")
 check_for_packages( packages) # Return TRUE if packages are installed, FALSE otherwise
 
 here::here()
@@ -142,17 +142,36 @@ The Toronto Police Major Crime Indicators Data was collected between the years o
 
 ***MCI** categories included in this analysis are: **Assault, Break and Enter,  Auto Theft, Robbery** and **Theft Over**. 
 
-This study does not rely on the analysis of any specific time frame and to speed up the process, we will be analyzing the data of occurrences throughout the year of 2019. The **reporteddate** variable might present either the same period or sometime in the future. However, it does not compromise the accuracy of the results.
-
-
-
+This study does not intend to exhaust correlation nor find causation to support any evidence related to major crime indicator occurrences, order, motivation, aggravated factors nor to recommend mitigation practices. However, it is presented a list of 9 (nine) variables that I aim to explore as follows:
 
 ```{r Reading filtered data (2019), echo = FALSE, message = FALSE}
 mci <- read_csv( here( "inputs/data/filetered_mci.csv"))
 # head( mci) # display first six rows
 # names( mci) # column names
+mci$occurrencedate <- as.Date( mci$occurrencedate)
+mci$reporteddate <- as.Date( mci$reporteddate)
+
 
 # mci_type <- table(mci$MCI, mci$occurrencedate) # Distinct value count for MCI column
+mci_selected <- mci %>% select("MCI", "occurrencedate", "reporteddate","occurrencemonth", "occurrencehour", "offence", "Neighbourhood", "Lat", "Long" )
+
+mci_selected <- mci_selected[1:10, 1:9]
+
+mci_selected <- mci_selected %>% rename( 
+  Occurrence = occurrencedate, Reported = reporteddate, Month = occurrencemonth,
+  Hour = occurrencehour, Offence = offence, Hood = Neighbourhood)
+
+kbl(mci_selected) %>% kable_styling( 
+  bootstrap_options = "striped", font_size = 9, full_width = F, position = "left") %>% 
+  row_spec( 0, angle = 0)
+
+```
+
+This study does not rely on the analysis of any specific time frame and to speed up the process, we will be analyzing the data of occurrences throughout the year of 2019. The **reporteddate** variable might present either the same period or sometime in the future. However, it does not compromise the accuracy of the results.
+
+
+
+```{r MCI by Month, echo = FALSE, message = FALSE}
 
 ggplot(mci, aes(y = MCI, fill = occurrencemonth)) +
   geom_bar(stat = "count", position = position_dodge2(preserve = "single")) +
@@ -161,7 +180,6 @@ ggplot(mci, aes(y = MCI, fill = occurrencemonth)) +
   labs(title = "Major Crimes Indicator TORONTO 2019", caption = " Assault:19600; Auto-theft:5137; Break and Enter:8278; Robbery:3408; Theft-over:1251 ")
 
 ```
-
 
 Assault is undoubtedly the most prevalent form of violent crime throughout the year in Toronto, with no exception. It appears to have a few more assault incidents in June and July, with January and February holding the lowest number of occurrences.
 
@@ -263,7 +281,7 @@ ggplot( aes( x = reorder( offence, n), y = n), data = assault_sub_group) +
 After isolating **MCI** and **Neighbourhood** from the dataset (below plot), we see that Church-Yonge and Bay-Street corridor are the top 2 most dangerous neighborhoods. The former by being very close to the Ryerson University and home of the Toronto's Gay Village, but both being the heart of downtown Toronto holding the highest number of high-rise condominiums, office towers, apartments, rich area with restaurants, stores and bars. Therefore, the [Crime rate]("https://newcanadianlife.com/worst-neighborhoods-in-toronto-guide-for-newcomers/) is pronounced very high indeed with different rates of crime. 
 
 
-```{r , echo = FALSE, message=FALSE}
+```{r Top 25 Hoods by Crime Type, echo = FALSE, message=FALSE}
 crime_location <- summarise( group_by( mci, Neighbourhood), n = n( ))[ order( summarise( group_by( mci, Neighbourhood), n = n( ))$n, decreasing = TRUE), ]
 top25_location <- head( summarise( group_by( mci, Neighbourhood), n=n( )), 25)
 ggplot( aes( x = reorder( Neighbourhood, n), y = n), data = top25_location) +
@@ -285,7 +303,7 @@ ggplot( aes( x = reorder( Neighbourhood, n), y = n), data = top25_location) +
 The map below gathers three variables: **MCI, Latitude** and **Longitude** to show where are the major occurrences of crimes in the city of Toronto. As before mentioned, there is a large concentration of assaults happening downtown at Church-Yonge and Bay Street Corridor. East and North directions are more peaceful than other areas. Hence, we can compare high- and low-density areas, and optimize the visualization with the following map.
 
 
-```{r , echo=FALSE, message=FALSE}
+```{r Toronto Crime Map 2019, echo=FALSE, message=FALSE}
 map_data <- data.frame( mci$MCI, mci$Lat, mci$Long)
 colnames( map_data) <- c("Crimes", "Lat", "Lon")
 sbbox <- make_bbox( lon = mci$Long, lat = mci$Lat, f = 0.01)
