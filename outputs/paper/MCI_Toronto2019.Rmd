@@ -11,10 +11,10 @@ Output:bookdown::pdf_document2:toc: yes
 thanks: "Code and data are available at: https://github.com/CROliveira/MCI_Toronto2019"
 bibliography: references.bib
 output:
-  word_document: default
+  pdf_document: default
   html_document:
     df_print: paged
-  pdf_document: default
+  word_document: default
 ---
 
 \tableofcontents
@@ -225,6 +225,9 @@ It seems that the worst hours are at noon and the hours between 11 pm and 3 am. 
 
 
 
+
+
+
 ## What is the relation between time of the day and crime type?
 
 
@@ -247,7 +250,7 @@ Assaults are the most common crimes at all times, happening more frequently at e
 #          axis.title = element_text( size = 12, face = "bold"))
 ```
 
-
+\newpage
 
 ## What are the top 10 Assault subgroups
 
@@ -275,7 +278,7 @@ ggplot( aes( x = reorder( offence, n), y = n), data = assault_sub_group) +
 ```
 
 
-
+\newpage
 
 ## Where in the city these crimes are most likely to happen?
 
