@@ -47,19 +47,19 @@ here::here()
 # Introduction
 
 
-This paper brings to light all Major Crime Indicators (MCI) from the original homonymous dataset with data between the years of 2014 and 2019 by reported date and related offences. However, the analysis will focus on the year of 2019 as the most recent related cases. 
+This paper brings to light all Major Crime Indicators (MCI) from the original homonymous dataset with data between the years of 2014 and 2019 by reported date and related offenses. However, the analysis will focus on the year 2019 as the most recent related cases. 
 
 Major Crime Indicators (MCI) Dashboards and other information are available at [Major Crime Indicators - Toronto 2014-1019](https://opendata.arcgis.com/datasets/56a0d46ae5f141269f2598a8c07e25c1_0.geojson).
 
 
 The reported crime dataset is intended to provide communities with information regarding public safety and awareness. The data supplied to the Toronto Police Service by the reporting parties is preliminary and may not have been fully verified. 
 
-At the end, there is a showcase of clustering results over a map of the city of Toronto. The plot tries to represent the types of crimes that happened at different times of the day based on geographical locations.
+In the end, there is a showcase of clustering results over a map of the city of Toronto. The plot tries to represent the types of crimes that happened at different times of the day based on geographical locations.
 
 
 # Abstract
 
-This document is an analysis of crimes occurred in Toronto in 2019 by the "Toronto Police Department" [@torontopoliceservice] with a data description by "Toronto Open Data" [@opendatatoronto].
+This document is an analysis of crimes that occurred in Toronto in 2019 by the "Toronto Police Department" [@torontopoliceservice] with a data description by "Toronto Open Data" [@opendatatoronto].
 
 It was analyzed using R [@citeR], the "tidyverse" package written by [@tidyverse], "dplyr" package written by [@dplyr], "kableExtra" package written by [@kableExtra], "ggplot2" package written by [@ggplot2], and "ggmap" written by [@ggmap].
 
@@ -74,7 +74,7 @@ It was analyzed using R [@citeR], the "tidyverse" package written by [@tidyverse
 # The Data
 
 
-Data analysis steps were performed to find the best temporal and spatial representation of crimes overtime. The results show a comparison against other regions and time frame for a better overview. 
+Data analysis steps were performed to find the best temporal and spatial representation of crimes over time. The results show comparison against other regions and time frame for a better overview. 
 
 
 
@@ -149,7 +149,7 @@ The Toronto Police Major Crime Indicators Data was collected between the years o
 26. *Lat:*	Latitude of point extracted after offsetting X and & Coordinates to nearest intersection node
 27. *ObjectId:* 	Id of the report
 
-***MCI** categories included in this analysis are: **Assault, Break and Enter,  Auto Theft, Robbery** and **Theft Over**. 
+***MCI** categories included in this analysis are **Assault, Break and Enter,  Auto Theft, Robbery** and **Theft Over**. 
 
 This study does not intend to exhaust correlation nor find causation to support any evidence related to major crime indicator occurrences, order, motivation, aggravated factors nor to recommend mitigation practices. However, it is presented a list of 7 (seven) variables that I aim to explore as follows:
 
@@ -177,11 +177,11 @@ kbl(mci_selected) %>% kable_styling(
 
 ```
 
-This study does not rely on the analysis of any specific time frame and to speed up the process, we will be analyzing the data of occurrences throughout the year of 2019. The **reporteddate** variable might present either the same period or sometime in the future. However, it does not compromise the accuracy of the results.
+This study does not rely on the analysis of any specific time frame and to speed up the process, we will be analyzing the data of occurrences throughout the year 2019. The **reporteddate** variable might present either the same period or sometime in the future. However, it does not compromise the accuracy of the results.
 
 Assault is undoubtedly the most prevalent form of violent crime throughout the year in Toronto, with no exception. It appears to have a few more assault incidents in June and July, with January and February holding the lowest number of occurrences.
 
-It is not clear if seasons of the year are related to the number of occurrences and this analysis only considers one-year worth data which, in that case, might not be enough to draw further conclusions about seasonality correlation.
+It is not clear if the seasons of the year are related to the number of occurrences and this analysis only considers the one-year worth of data which, in that case, might not be enough to draw further conclusions about seasonality correlation.
 
 
 
@@ -240,7 +240,7 @@ It seems that the worst hours are at noon and the hours between 11 pm and 3 am. 
 ## What is the relation between time of the day and crime type?
 
 
-Assaults are the most common crimes at all times, happening more frequently at early afternoon and late at night. Conversely, Break and Enter get the top position in the morning when, technically, most people are sleeping followed by another peak at noon when people are out picking their kids at school or doing groceries for lunch. Auto theft is another crime type that reaches a peak, but not before eight at night when many cars have just parked, and drivers are distracted by family and unpacking the trunk. All crime patterns and its timeline make sense.
+Assaults are the most common crimes at all times, happening more frequently in the early afternoon and late at night. Conversely, Break and Enter get the top position in the morning when, technically, most people are sleeping followed by another peak at noon when people are out picking their kids at school or doing groceries for lunch. Auto theft is another crime type that reaches a peak, but not before eight at night when many cars have just parked, and drivers are distracted by family and unpacking the trunk. All crime patterns and its timeline make sense.
 
 
 ```{r Simple plot of frequency of Crimes, echo=FALSE, message=FALSE}
@@ -292,7 +292,7 @@ ggplot( aes( x = reorder( offence, n), y = n), data = assault_sub_group) +
 ## Where in the city these crimes are most likely to happen?
 
 
-After isolating **MCI** and **Neighbourhood** from the dataset (below plot), we see that Church-Yonge and Bay-Street corridor are the top 2 most dangerous neighborhoods. The former by being very close to the Ryerson University and home of the Toronto's Gay Village, but both being the heart of downtown Toronto holding the highest number of high-rise condominiums, office towers, apartments, rich area with restaurants, stores and bars. Therefore, the [Crime rate]("https://newcanadianlife.com/worst-neighborhoods-in-toronto-guide-for-newcomers/) is pronounced very high indeed with different rates of crime. 
+After isolating **MCI** and **Neighbourhood** from the dataset (below plot), we see that Church-Yonge and Bay-Street corridor are the top 2 most dangerous neighborhoods. The former by being very close to the Ryerson University and home of Toronto's Gay Village, but both being the heart of downtown Toronto holding the highest number of high-rise condominiums, office towers, apartments, a rich area with restaurants, stores, and bars. Therefore, the [Crime rate]("https://newcanadianlife.com/worst-neighborhoods-in-toronto-guide-for-newcomers/) is pronounced very high indeed with different rates of crime. 
 
 
 ```{r Top 25 Hoods by Crime Type, echo = FALSE, message=FALSE}
@@ -338,10 +338,10 @@ It is no surprise that downtown holds the major concentration of crimes of all t
 
 # Conclusion
 
-This analysis enlightened readers the correlation between Toronto neighborhood, crime rate, type and propensity to occur across the variable time. Clustering methods were applied to showcase the subcategory of offence in Assault crimes to provide the audience with a more detailed overview of the city. Several visual representations were used to illustrate what have been talked on this preliminary analysis. However, other steps seem necessary to cross-relate them with other aspects of the crime compound (seasonality, ethnicity of offenders, educational and employment levels, etc.) in an investigative and even preventive approach.
+This analysis enlightened readers on the correlation between Toronto neighborhood, crime rate, type, and propensity to occur across the variable time. Clustering methods were applied to showcase the subcategory of offense in Assault crimes to provide the audience with a more detailed overview of the city. Several visual representations were used to illustrate what has been talked on this preliminary analysis. However, other steps seem necessary to cross-relate them with other aspects of the crime compound (seasonality, the ethnicity of offenders, educational and employment levels, etc.) in an investigative and even preventive approach.
 
 
-Results of the analysis points out that certain neighborhoods characteristics are related to higher or lower crime rates. There is a spatial correspondence between crimes and the area of occurrences, but this study does not provide a description of the complex mechanisms underlying this correlation. To address such questions, it would be useful to analyze the data over a larger period of time and the collection of economic and demographic features to better understand the mechanisms that are related to higher or lower crime rates across the studied area.
+Results of the analysis point out that certain neighborhood characteristics are related to higher or lower crime rates. There is a spatial correspondence between crimes and the area of occurrences, but this study does not provide a description of the complex mechanisms underlying this correlation. To address such questions, it would be useful to analyze the data over a larger period of time and the collection of economic and demographic features to better understand the mechanisms that are related to higher or lower crime rates across the studied area.
 
 
 Undoubtedly, Toronto repeats what is seen around the globe: the majority of crimes happen in commercial areas which in Toronto's case has also the major residential density Furthermore, this study identified dangerous hot spots at certain times and places and, I hope, it can help with a better planning and safety measures to prevent crime rates to further escalate. 
