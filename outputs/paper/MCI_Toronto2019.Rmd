@@ -11,22 +11,17 @@ Output:bookdown::pdf_document2:toc: yes
 thanks: "Code and data are available at: https://github.com/CROliveira/MCI_Toronto2019"
 bibliography: references.bib
 output:
-  pdf_document: default
   html_document:
     df_print: paged
+  pdf_document: default
   word_document: default
 ---
 
 \tableofcontents
 
+
 \newpage
 
-# MAJOR CRIME INDICATORS IN TORONTO 2019
-
-
-This document is an analysis of crimes occurred in Toronto in 2019 by the "Toronto Police Department" [@torontopoliceservice] with a data description by "Toronto Open Data" [@opendatatoronto].
-
-It was analyzed using R [@citeR], the "tidyverse" package written by [@tidyverse], "dplyr" package written by [@dplyr], "kableExtra" package written by [@kableExtra], "ggplot2" package written by [@ggplot2], and "ggmap" written by [@ggmap].
 
 
 ```{r setup, include=FALSE}
@@ -60,6 +55,20 @@ Major Crime Indicators (MCI) Dashboards and other information are available at [
 The reported crime dataset is intended to provide communities with information regarding public safety and awareness. The data supplied to the Toronto Police Service by the reporting parties is preliminary and may not have been fully verified. 
 
 At the end, there is a showcase of clustering results over a map of the city of Toronto. The plot tries to represent the types of crimes that happened at different times of the day based on geographical locations.
+
+
+# Abstract
+
+This document is an analysis of crimes occurred in Toronto in 2019 by the "Toronto Police Department" [@torontopoliceservice] with a data description by "Toronto Open Data" [@opendatatoronto].
+
+It was analyzed using R [@citeR], the "tidyverse" package written by [@tidyverse], "dplyr" package written by [@dplyr], "kableExtra" package written by [@kableExtra], "ggplot2" package written by [@ggplot2], and "ggmap" written by [@ggmap].
+
+^[https://github.com/CROliveira/MCI_Toronto2019]
+
+\newpage
+
+
+# MAJOR CRIME INDICATORS IN TORONTO 2019
 
 
 # The Data
