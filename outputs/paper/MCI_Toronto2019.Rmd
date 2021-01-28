@@ -26,7 +26,7 @@ output:
 
 This document is an analysis of crimes occurred in Toronto in 2019 by the "Toronto Police Department" [@torontopoliceservice] with a data description by "Toronto Open Data" [@opendatatoronto].
 
-It was analyzed using R [@citeR], the "tidyverse" package written by [@tidyverse], "dplyr" package written by [@dplyr], and "ggplot2" package written by [@ggplot2], and "ggmap" written by [@ggmap].
+It was analyzed using R [@citeR], the "tidyverse" package written by [@tidyverse], "dplyr" package written by [@dplyr], "kableExtra" package written by [@kableExtra], "ggplot2" package written by [@ggplot2], and "ggmap" written by [@ggmap].
 
 
 ```{r setup, include=FALSE}
@@ -142,7 +142,7 @@ The Toronto Police Major Crime Indicators Data was collected between the years o
 
 ***MCI** categories included in this analysis are: **Assault, Break and Enter,  Auto Theft, Robbery** and **Theft Over**. 
 
-This study does not intend to exhaust correlation nor find causation to support any evidence related to major crime indicator occurrences, order, motivation, aggravated factors nor to recommend mitigation practices. However, it is presented a list of 9 (nine) variables that I aim to explore as follows:
+This study does not intend to exhaust correlation nor find causation to support any evidence related to major crime indicator occurrences, order, motivation, aggravated factors nor to recommend mitigation practices. However, it is presented a list of 7 (seven) variables that I aim to explore as follows:
 
 ```{r Reading filtered data (2019), echo = FALSE, message = FALSE}
 mci <- read_csv( here( "inputs/data/filetered_mci.csv"))
@@ -151,23 +151,28 @@ mci <- read_csv( here( "inputs/data/filetered_mci.csv"))
 mci$occurrencedate <- as.Date( mci$occurrencedate)
 mci$reporteddate <- as.Date( mci$reporteddate)
 
-
 # mci_type <- table(mci$MCI, mci$occurrencedate) # Distinct value count for MCI column
-mci_selected <- mci %>% select("MCI", "occurrencedate", "reporteddate","occurrencemonth", "occurrencehour", "offence", "Neighbourhood", "Lat", "Long" )
+mci_selected <- mci %>% select("MCI", "occurrencedate", "reporteddate", "offence", "Neighbourhood", "Lat", "Long" )
 
-mci_selected <- mci_selected[1:10, 1:9]
+mci_selected <- mci_selected[1:10, 1:7]
+mci_selected$Lat <- format(round(mci_selected$Lat, 2), nsmall = 2)
+mci_selected$Long <- format(round(mci_selected$Long, 2), nsmall = 2)
 
 mci_selected <- mci_selected %>% rename( 
-  Occurrence = occurrencedate, Reported = reporteddate, Month = occurrencemonth,
-  Hour = occurrencehour, Offence = offence, Hood = Neighbourhood)
+  Occurrence = occurrencedate, Reported = reporteddate, Offence = offence, Hood = Neighbourhood)
 
 kbl(mci_selected) %>% kable_styling( 
-  bootstrap_options = "striped", font_size = 9, full_width = F, position = "left") %>% 
+  bootstrap_options = "striped", font_size = 8, full_width = F, position = "left") %>% 
+  # add_header_above(c(" " = 1, "Group 1" = 2, "Group 2" = 2, "Group 3" = 2, "Group 4" = 2)) %>%
   row_spec( 0, angle = 0)
 
 ```
 
 This study does not rely on the analysis of any specific time frame and to speed up the process, we will be analyzing the data of occurrences throughout the year of 2019. The **reporteddate** variable might present either the same period or sometime in the future. However, it does not compromise the accuracy of the results.
+
+Assault is undoubtedly the most prevalent form of violent crime throughout the year in Toronto, with no exception. It appears to have a few more assault incidents in June and July, with January and February holding the lowest number of occurrences.
+
+It is not clear if seasons of the year are related to the number of occurrences and this analysis only considers one-year worth data which, in that case, might not be enough to draw further conclusions about seasonality correlation.
 
 
 
@@ -181,9 +186,6 @@ ggplot(mci, aes(y = MCI, fill = occurrencemonth)) +
 
 ```
 
-Assault is undoubtedly the most prevalent form of violent crime throughout the year in Toronto, with no exception. It appears to have a few more assault incidents in June and July, with January and February holding the lowest number of occurrences.
-
-It is not clear if seasons of the year are related to the number of occurrences and this analysis only considers one-year worth data which, in that case, might not be enough to draw further conclusions about seasonality correlation.
 
 
 ```{r , echo = FALSE, message = FALSE, include = FALSE}
