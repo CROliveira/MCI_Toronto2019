@@ -11,10 +11,10 @@ Output:bookdown::pdf_document2:toc: yes
 thanks: "Code and data are available at: https://github.com/CROliveira/MCI_Toronto2019"
 bibliography: references.bib
 output:
-  pdf_document: default
   word_document: default
   html_document:
     df_print: paged
+  pdf_document: default
 ---
 
 \tableofcontents
