@@ -1,8 +1,7 @@
 ---
 Title: Toronto Major Crime Indicators
 Subtitle: Crime by Neighborhoods
-Purpose: Use Toronto Police Service Public Safety Data Portal to get crime data from
-  Toronto by Major Crime Indicators
+Purpose: Use Toronto Police Service Public Safety Data Portal to get crime data from Toronto by Major Crime Indicators
 Author: Celio Oliveira
 Contact: oliveira.celior@gmail.com
 Date: r format(Sys.time(), "%d %B %Y")
@@ -12,10 +11,10 @@ thanks: "Code and data are available at: https://github.com/CROliveira/MCI_Toron
 bibliography: references.bib
 output:
   word_document: default
+  pdf_document: default
   html_document:
     df_print: paged
-  pdf_document: default
-# always_allow_html: true
+always_allow_html: true
 ---
 
 \tableofcontents
@@ -26,7 +25,7 @@ output:
 
 ```{r setup, include=FALSE}
 ## Setting up the environment
-knitr::opts_chunk$set( echo = TRUE, fig.path = "images/")
+knitr::opts_chunk$set( echo = TRUE, fig.path = "figures/")
 
 # Check.packages function: install and load multiple R packages.
 check_for_packages <- function( pkg){
@@ -46,6 +45,17 @@ here::here() # Setting a work directory
 webshot::install_phantomjs() # Installing a helper library for html files
 
 ```
+
+
+# Abstract
+
+This document is an analysis of crimes that occurred in Toronto in 2019 by the "Toronto Police Department" [@torontopoliceservice] with a data description by "Toronto Open Data" [@opendatatoronto].
+
+It was analyzed using R [@citeR], the "tidyverse" package written by [@tidyverse], "dplyr" package written by [@dplyr], "kableExtra" package written by [@kableExtra], "ggplot2" package written by [@ggplot2], and "ggmap" written by [@ggmap].
+
+^[https://github.com/CROliveira/MCI_Toronto2019]
+
+
 # Introduction
 
 
@@ -59,14 +69,6 @@ The reported crime dataset is intended to provide communities with information r
 In the end, there is a showcase of clustering results over a map of the city of Toronto. The plot tries to represent the types of crimes that happened at different times of the day based on geographical locations.
 
 
-# Abstract
-
-This document is an analysis of crimes that occurred in Toronto in 2019 by the "Toronto Police Department" [@torontopoliceservice] with a data description by "Toronto Open Data" [@opendatatoronto].
-
-It was analyzed using R [@citeR], the "tidyverse" package written by [@tidyverse], "dplyr" package written by [@dplyr], "kableExtra" package written by [@kableExtra], "ggplot2" package written by [@ggplot2], and "ggmap" written by [@ggmap].
-
-^[https://github.com/CROliveira/MCI_Toronto2019]
-
 \newpage
 
 
@@ -77,8 +79,6 @@ It was analyzed using R [@citeR], the "tidyverse" package written by [@tidyverse
 
 
 Data analysis steps were performed to find the best temporal and spatial representation of crimes over time. The results show comparison against other regions and time frame for a better overview. 
-
-
 
 
 ```{r Fetching Data Description, include = FALSE, echo = FALSE}
@@ -98,27 +98,20 @@ Data analysis steps were performed to find the best temporal and spatial represe
 # View( mci_data_description)
 ```
 
-```{r MCI Toronto, echo = FALSE}
+```{r MCI Toronto, include=FALSE, echo = FALSE, message = FALSE}
+#### ATTENTION: IT IS NOT RECOMMENDED TO RUN THIS PART OF THE CODE IF YOU HAVE A FREE ACCOUNT ON GITHUB AS THE FILE IS 168 MB. HENCE, TOO LARGE TO COMMIT. #####
 # url <- "https://opendata.arcgis.com/datasets/56a0d46ae5f141269f2598a8c07e25c1_0.geojson" # File of interest's URL
-
-# output_file <- here::here("inputs/data") # Destination directory to store the new file 
-
+# output_file <- here::here("inputs/data/MCI_2014_to_2019.csv") # Destination directory to store the new file 
 # download.file( url, output_file) # Download the file
-```
-
-```{r, include=FALSE, echo = FALSE, message = FALSE}
-# data <- read_csv(here( "inputs/data/MCI_2014_to_2019.csv")) # Read the dataset stored on this directory
 # 
+# data <- read_csv(here( "inputs/data/MCI_2014_to_2019.csv")) # Read the dataset stored on this directory
 # drop <- c( "X","Y") # Creates a variable with columns to be dropped
 # data = data[,!( names(data) %in% drop)] # Dropping columns X, Y.
-
-```
-
-
-```{r Filtering data from 2019, include = FALSE, echo = FALSE}
-# filetered_mci <- filter( data, occurrenceyear == "2019") # Filter the dataset by occurrence year (2019)
-
+#
+# filetered_mci <- filter( data, occurrenceyear == "2019") # Filter the dataset by occurrence year (2019) ##### > 50 MB MEMORY SIZE
 # write.csv(here::here( "inputs/data/filetered_mci.csv")) # Write the filtered dataset 
+
+################## END OF GIGANTIC FILE ###############################
 ```
 
 

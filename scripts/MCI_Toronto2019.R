@@ -16,7 +16,7 @@
 # pdf_document: default
 # word_document: default
 # ---
-  
+
 
 ## Setting up the environment
 
@@ -49,34 +49,29 @@ here::here()
 # library(opendatatoronto)
 # 
 # mci_data_description <-
-#   opendatatoronto::search_packages( "Major Crime Indicators") %>% # Query based on the term/phrase
-#   opendatatoronto::list_package_resources() %>% # Returns a list of the findings
-#   filter( name == "data_dictionary.csv") %>% # Get this specific file name
-#   select( id) %>% # Selects the row from the list to download
-#   opendatatoronto::get_resource() # Download the package/data/file
-
-# package <- show_package( "247788f6-ca20-42e8-b00f-894ac43053e5") # Search by package ID
-
+#    opendatatoronto::search_packages( "Major Crime Indicators") %>% # Query based on the term/phrase
+#    opendatatoronto::list_package_resources() %>% # Returns a list of the findings
+#    filter( name == "data_dictionary.csv") %>% # Get this specific file name
+#    select( id) %>% # Selects the row from the list to download
+#    opendatatoronto::get_resource() # Download the package/data/file
+# 
 # write.csv(here::here( "inputs/data/mci_data_description.csv")) # Write the downloaded file on a specific directory
-
 # View( mci_data_description)
 
+
+#### ATTENTION: IT IS NOT RECOMMENDED TO RUN THIS PART OF THE CODE IF YOU HAVE A FREE ACCOUNT ON GITHUB AS THE FILE IS 168 MB. HENCE, TOO LARGE TO COMMIT. #####
 # url <- "https://opendata.arcgis.com/datasets/56a0d46ae5f141269f2598a8c07e25c1_0.geojson" # File of interest's URL
-
-# output_file <- here::here("inputs/data") # Destination directory to store the new file 
-
+# output_file <- here::here("inputs/data/MCI_2014_to_2019.csv") # Destination directory to store the new file 
 # download.file( url, output_file) # Download the file
-
-# data <- read_csv(here( "inputs/data/MCI_2014_to_2019.csv")) # Read the dataset stored on this directory
 # 
+# data <- read_csv(here( "inputs/data/MCI_2014_to_2019.csv")) # Read the dataset stored on this directory
 # drop <- c( "X","Y") # Creates a variable with columns to be dropped
 # data = data[,!( names(data) %in% drop)] # Dropping columns X, Y.
-
-
-# filetered_mci <- filter( data, occurrenceyear == "2019") # Filter the dataset by occurrence year (2019)
-
+#
+# filetered_mci <- filter( data, occurrenceyear == "2019") # Filter the dataset by occurrence year (2019) ##### > 50 MB MEMORY SIZE
 # write.csv(here::here( "inputs/data/filetered_mci.csv")) # Write the filtered dataset 
 
+################## END OF GIGANTIC FILE ###############################
 
 ## Data Description
 
@@ -202,7 +197,7 @@ sbbox <- make_bbox( lon = mci$Long, lat = mci$Lat, f = 0.01)
 my_map <- get_map( location = sbbox, maptype = "roadmap", scale = 2, color = "bw", zoom = 9)
 ggmap( my_map) +
   geom_point( data=map_data, aes( x = mci$Long, y = mci$Lat, color = "#27AE60"), 
-             size = 0.5, alpha = 0.08) + ggtitle("Toronto's Crime Map 2019") + 
+              size = 0.5, alpha = 0.08) + ggtitle("Toronto's Crime Map 2019") + 
   guides( color = FALSE) + facet_wrap( ~ Crimes, nrow = 2) +
   theme( plot.title = element_text( size = 20, face = "bold", hjust = 0.5), # Set font size 20, in bold and centralized
          axis.line = element_blank( ), axis.text = element_blank( ),
