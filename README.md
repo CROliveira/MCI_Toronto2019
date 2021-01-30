@@ -5,8 +5,6 @@ Data Source: services.arcgis.com
 
 =======
 
-INF2178AssignmentOne_Major Crime Indicators_Toronto2019
-
 This repo includes all Major Crime Indicators (MCI) 2014 to 2019 occurrences by reported date and related offenses. Major Crime Indicators (MCI) Dashboard.
 
 The dataset can be downloaded here: [Major Crime Indicators - Toronto 2014-1019](https://opendata.arcgis.com/datasets/56a0d46ae5f141269f2598a8c07e25c1_0).
