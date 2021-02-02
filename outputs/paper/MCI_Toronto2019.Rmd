@@ -7,7 +7,7 @@ Contact: oliveira.celior@gmail.com
 Date: r format(Sys.time(), "%d %B %Y")
 Pre-requisites: None
 Output:bookdown::pdf_document2:toc: yes
-thanks: "Code and data are available at: https://github.com/CROliveira/MCI_Toronto2019"
+thanks: Code and data are available at: https://github.com/CROliveira/MCI_Toronto2019
 bibliography: references.bib
 output:
   word_document: default
