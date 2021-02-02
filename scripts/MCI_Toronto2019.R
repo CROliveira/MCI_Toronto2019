@@ -1,20 +1,20 @@
 # ---
-#   Title: Toronto Major Crime Indicators
-# Subtitle: Crime by Neighborhoods
-# Purpose: Use Toronto Police Service Public Safety Data Portal to get crime data from
-# Toronto by Major Crime Indicators
-# Author: Celio Oliveira
-# Contact: oliveira.celior@gmail.com
-# Date: r format(Sys.time(), "%d %B %Y")
-# Pre-requisites: None
-# Output:bookdown::pdf_document2:toc: yes
+# title: "Major Crime Indicators in Toronto in 2019"
+# subtitle: "Which are the most dangerous areas in the city and at what time? What was the most common crime type in 2019?"
+# purpose: "Use Toronto Police Service Public Safety Data Portal to get crime data from Toronto by Major Crime Indicators"
+# author: "Celio Oliveira"
+# contact: "oliveira.celior@gmail.com"
+# date: "`r format(Sys.time(), '%d %B, %Y')`"
+# pre-requisites: "None"
+# output:bookdown::pdf_document2:toc: yes
 # thanks: "Code and data are available at: https://github.com/CROliveira/MCI_Toronto2019"
 # bibliography: references.bib
 # output:
-#   html_document:
-#   df_print: paged
-# pdf_document: default
-# word_document: default
+#   # word_document: default
+#   pdf_document: default
+# # html_document: 
+# df_print: paged
+# always_allow_html: true
 # ---
 
 
