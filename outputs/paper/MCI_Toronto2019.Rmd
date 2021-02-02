@@ -1,7 +1,7 @@
 ---
 title: "Major Crime Indicators in Toronto in 2019"
 subtitle: "Which are the most dangerous areas in the city and at what time? What was the most common crime type in 2019?"
-purpose: Use Toronto Police Service Public Safety Data Portal to get crime data from Toronto by Major Crime Indicators
+purpose: "Use Toronto Police Service Public Safety Data Portal to get crime data from Toronto by Major Crime Indicators"
 author: "Celio Oliveira"
 contact: "oliveira.celior@gmail.com"
 date: "`r format(Sys.time(), '%d %B, %Y')`"
